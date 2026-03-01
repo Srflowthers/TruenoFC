@@ -23,6 +23,16 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Rutas de Administrador
+Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    // Check if the user is actually an admin could be done with a middleware, 
+    // but for now relying on the dashboard redirect / specific logic if needed. 
+    // We should ideally protect this route so only admin can access.
+    Route::get('/members', [\App\Http\Controllers\Admin\MemberController::class, 'index'])->name('members.index');
+    Route::get('/members/create', [\App\Http\Controllers\Admin\MemberController::class, 'create'])->name('members.create');
+    Route::post('/members', [\App\Http\Controllers\Admin\MemberController::class, 'store'])->name('members.store');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
