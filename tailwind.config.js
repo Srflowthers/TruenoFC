@@ -12,8 +12,16 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Inter', ...defaultTheme.fontFamily.sans],
+                title: ['Oswald', 'sans-serif'],
             },
+            colors: {
+                brand: {
+                    black: '#0a0a0a',
+                    red: '#CF142B',
+                    darkred: '#991B1B'
+                }
+            }
         },
     },
 
